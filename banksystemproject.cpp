@@ -258,6 +258,10 @@ Bank::~Bank()
         outfile.close();
     }
     catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
+        if (const char* msg = e.what()) {
+            std::cerr << msg << '\n';
+        } else {
+            std::cerr << "Unknown exception occurred" << '\n';
+        }
     }
 }
