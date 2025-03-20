@@ -258,6 +258,6 @@ Bank::~Bank()
         outfile.close();
     }
     catch (const std::exception& e) {
-        cout << e.what() << '\n';
+        
     }
 }
