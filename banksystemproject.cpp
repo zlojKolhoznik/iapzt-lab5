@@ -18,7 +18,7 @@ private:
     static long NextAccountNumber;
 
 public:
-    Account() {}
+    Account() : accountNumber(0), balance(0) {}
     Account(string fname, string lname, float balance);
     long getAccNo() { return accountNumber; }
     string getFirstName() { return firstName; }
@@ -248,11 +248,16 @@ void Bank::ShowAllAccounts()
 Bank::~Bank()
 {
     ofstream outfile;
-    outfile.open("Bank.data", ios::trunc);
-    map<long, Account>::iterator itr;
-    for (itr = accounts.begin(); itr != accounts.end(); itr++)
-    {
-        outfile << itr->second;
+    try {
+        outfile.open("Bank.data", ios::trunc);
+        map<long, Account>::iterator itr;
+        for (itr = accounts.begin(); itr != accounts.end(); itr++)
+        {
+            outfile << itr->second;
+        }
+        outfile.close();
     }
-    outfile.close();
+    catch (const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
 }
